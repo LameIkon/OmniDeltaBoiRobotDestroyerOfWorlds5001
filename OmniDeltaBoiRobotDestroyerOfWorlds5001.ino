@@ -1,4 +1,4 @@
-//#include "MotorDriver.h"
+#include "MotorDriver.h"
 #include <UnoR4WiFi_WebServer.h>
 #include "index.h"
 
@@ -8,13 +8,13 @@
 #define CMD_LEFT 4
 #define CMD_RIGHT 8
 
-//MotorDriver m;
+MotorDriver m;
 
-const int MY_LED = 13;
+//const int MY_LED = 13;
 
 // WiFi credentials
-const char WIFI_SSID[] = "name";
-const char WIFI_PASSWORD[] = "pass";
+const char WIFI_SSID[] = "OnePlusNordCE3Lite5G";
+const char WIFI_PASSWORD[] = "6204jonas";
 
 // Create web server instance
 UnoR4WiFi_WebServer server(80);
@@ -51,24 +51,24 @@ void onWebSocketMessage(net::WebSocket& ws, const net::WebSocket::DataType dataT
   switch (command) {
     case CMD_STOP:
       Serial.println("Stop");
-      //CAR_stop();
+      stop();
       break;
     case CMD_FORWARD:
       Serial.println("Move Forward");
-      //CAR_moveForward();
-      turnOnLED();
+      //turnOnLED();
+      forward();
       break;
     case CMD_BACKWARD:
       Serial.println("Move Backward");
-      //CAR_moveBackward();
+      backward();
       break;
     case CMD_LEFT:
       Serial.println("Turn Left");
-      //CAR_turnLeft();
+      left();
       break;
     case CMD_RIGHT:
       Serial.println("Turn Right");
-      //CAR_turnRight();
+      right();
       break;
 
     default:
@@ -84,7 +84,7 @@ void setup()
 {
   Serial.begin(9600);
   delay(1000);
-  pinMode(MY_LED, OUTPUT);
+  //pinMode(MY_LED, OUTPUT);
   //turnOnLED();
 
   Serial.println("Arduino Uno R4 WiFi - WebSocket Server");
@@ -117,71 +117,78 @@ void loop()
   delay(10);
 }
 
-void turnOnLED() {
-  digitalWrite(MY_LED, HIGH);
+// void turnOnLED() {
+//   digitalWrite(MY_LED, HIGH);
+// }
+
+void stop(){
+  m.motor(4,FORWARD,0);
+  m.motor(3,BACKWARD,0);
+  m.motor(2,BACKWARD,0);
+  m.motor(1,FORWARD,0);
 }
 
-// void rotateClockwise(){
-//   m.motor(4,FORWARD,255);
-//   m.motor(3,BACKWARD,255);
-//   m.motor(2,BACKWARD,255);
-//   m.motor(1,FORWARD,255);
-// }
+void rotateClockwise(){
+  m.motor(4,FORWARD,255);
+  m.motor(3,BACKWARD,255);
+  m.motor(2,BACKWARD,255);
+  m.motor(1,FORWARD,255);
+}
 
-// void rotateAnticlockwise(){
-//   m.motor(4,BACKWARD,255);
-//   m.motor(3,FORWARD,255);
-//   m.motor(2,FORWARD,255);
-//   m.motor(1,BACKWARD,255);
-// }
+void rotateAnticlockwise(){
+  m.motor(4,BACKWARD,255);
+  m.motor(3,FORWARD,255);
+  m.motor(2,FORWARD,255);
+  m.motor(1,BACKWARD,255);
+}
 
-// void leftBackward(){
-//   m.motor(4,BACKWARD,255);
-//   m.motor(2,BACKWARD,255);
-// }
+void leftBackward(){
+  m.motor(4,BACKWARD,255);
+  m.motor(2,BACKWARD,255);
+}
 
-// void leftForward(){
-//   m.motor(3,FORWARD,255);
-//   m.motor(1,FORWARD,255);
-// }
+void leftForward(){
+  m.motor(3,FORWARD,255);
+  m.motor(1,FORWARD,255);
+}
 
-// void rightBackward(){
-//   m.motor(3,BACKWARD,255);
-//   m.motor(1,BACKWARD,255);
-// }
+void rightBackward(){
+  m.motor(3,BACKWARD,255);
+  m.motor(1,BACKWARD,255);
+}
 
-// void rightForward(){
-//   m.motor(2,FORWARD,255);
-//   m.motor(4,FORWARD,255);
-// }
+void rightForward(){
+  m.motor(2,FORWARD,255);
+  m.motor(4,FORWARD,255);
+}
 
 
-// void left(){
-//   m.motor(1,FORWARD,255);
-//   m.motor(2,BACKWARD,255);
-//   m.motor(3,FORWARD,255);
-//   m.motor(4,BACKWARD,255);
-// }
+void left(){
+  m.motor(1,FORWARD,255);
+  m.motor(2,BACKWARD,255);
+  m.motor(3,FORWARD,255);
+  m.motor(4,BACKWARD,255);
+}
 
-// void right(){
-//   m.motor(1,BACKWARD,255);
-//   m.motor(2,FORWARD,255);
-//   m.motor(3,BACKWARD,255);
-//   m.motor(4,FORWARD,255);
-// }
+void right(){
+  m.motor(1,BACKWARD,255);
+  m.motor(2,FORWARD,255);
+  m.motor(3,BACKWARD,255);
+  m.motor(4,FORWARD,255);
+}
 
-// void backward()
-// {
-//   m.motor(1,BACKWARD,255);
-//   m.motor(2,BACKWARD,255);
-//   m.motor(3,BACKWARD,255);
-//   m.motor(4,BACKWARD,255);
-// }
+void backward()
+{
+  m.motor(1,BACKWARD,255);
+  m.motor(2,BACKWARD,255);
+  m.motor(3,BACKWARD,255);
+  m.motor(4,BACKWARD,255);
+}
 
-// void forward()
-// {
-//   m.motor(1,FORWARD,255);
-//   m.motor(2,FORWARD,255);
-//   m.motor(3,FORWARD,255);  
-//   m.motor(4,FORWARD,255);
-// }
+void forward()
+{
+  m.motor(1,FORWARD,255);
+  m.motor(2,FORWARD,255);
+  m.motor(3,FORWARD,255);  
+  m.motor(4,FORWARD,255);
+}
