@@ -99,7 +99,9 @@ const char *HTML_CONTENT = R"=====(
                 .button_up_left,
                 .button_up_right,
                 .button_down_left,
-                .button_down_right {
+                .button_down_right,
+                .button_rot_clockwise,
+                .button_rot_anti_clockwise {
                     width: 100px;
                     height: 100px;
                     color: #33e3ff;
@@ -125,6 +127,14 @@ const char *HTML_CONTENT = R"=====(
                     bottom: 15px;
                     right: 15px;
                 }
+                .button_rot_clockwise {
+                    right: -0;
+                    top: 620px;
+                }
+                .button_rot_anti_clockwise {
+                    left: -0;
+                    top: 620px;
+                }
             </style>
             <script>
                 var CMD_STOP = 0;
@@ -137,6 +147,9 @@ const char *HTML_CONTENT = R"=====(
                 let CMD_BACKWARD_LEFT = 6;
                 let CMD_FORWARD_RIGHT = 9;
                 let CMD_BACKWARD_RIGHT = 10;
+
+                let CMD_ROTATE_CLOCKWISE = 11;
+                let CMD_ROTATE_ANTI_CLOCKWISE = 12;
 
                 var img_name_lookup = {
                     [CMD_STOP]: "stop",
@@ -240,6 +253,9 @@ const char *HTML_CONTENT = R"=====(
                 <div id="9" class="button_up_right">Forward Right</div>
                 <div id="6" class="button_down_left">Backward Left</div>
                 <div id="10" class="button_down_right">Backward Right</div>
+
+                <div id="11" class="button_rot_clockwise">Clockwise</div>
+                <div id="12" class="button_rot_anti_clockwise">Anti Clockwise</div>
             </div>
             <p>
                 WebSocket : <span id="ws_state" style="color: blue">closed</span
@@ -258,4 +274,5 @@ const char *HTML_CONTENT = R"=====(
             </div>
         </body>
     </html>
+
 )=====";
