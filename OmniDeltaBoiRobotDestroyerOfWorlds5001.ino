@@ -8,6 +8,11 @@
 #define CMD_LEFT 4
 #define CMD_RIGHT 8
 
+#define CMD_FORWARD_LEFT 5
+#define CMD_BACKWARD_LEFT 6
+#define CMD_FORWARD_RIGHT 9
+#define CMD_BACKWARD_RIGHT 10
+
 MotorDriver m;
 
 //const int MY_LED = 13;
@@ -53,6 +58,7 @@ void onWebSocketMessage(net::WebSocket& ws, const net::WebSocket::DataType dataT
       Serial.println("Stop");
       stop();
       break;
+
     case CMD_FORWARD:
       Serial.println("Move Forward");
       //turnOnLED();
@@ -69,6 +75,23 @@ void onWebSocketMessage(net::WebSocket& ws, const net::WebSocket::DataType dataT
     case CMD_RIGHT:
       Serial.println("Turn Right");
       right();
+      break;
+
+    case CMD_FORWARD_LEFT:
+      Serial.println("Move Forward-Left");
+      leftForward();
+      break;
+    case CMD_FORWARD_RIGHT:
+      Serial.println("Move Forward-Right");
+      rightForward();
+      break;
+    case CMD_BACKWARD_LEFT:
+      Serial.println("Move Backward-Left");
+      leftBackward();
+      break;
+    case CMD_BACKWARD_RIGHT:
+      Serial.println("Move Backward-Right");
+      rightBackward();
       break;
 
     default:
@@ -189,6 +212,6 @@ void forward()
 {
   m.motor(1,FORWARD,255);
   m.motor(2,FORWARD,255);
-  m.motor(3,FORWARD,255);  
+  m.motor(3,FORWARD,255);
   m.motor(4,FORWARD,255);
 }
