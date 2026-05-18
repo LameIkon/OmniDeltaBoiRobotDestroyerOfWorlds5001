@@ -31,8 +31,8 @@ int volume = 5;
 // WiFi credentials
 // const char WIFI_SSID[] = "OnePlusNordCE3Lite5G";
 // const char WIFI_PASSWORD[] = "6204jonas";
-const char WIFI_SSID[] = "Johans";
-const char WIFI_PASSWORD[] = "Omnibobx";
+const char WIFI_SSID[] = "JonassA54";
+const char WIFI_PASSWORD[] = "molsted5";
 
 bool playing = false;
 
